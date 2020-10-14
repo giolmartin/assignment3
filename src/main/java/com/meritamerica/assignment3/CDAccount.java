@@ -1,46 +1,37 @@
 package com.meritamerica.assignment3;
 
-import java.util.Date;
-
-
-
 public class CDAccount extends BankAccount {
 
 	private double balance;
-	private Date date;
 	private CDOffering offering;
-
+	
 	
 	
 	CDAccount(CDOffering offering, double balance){
-		super(balance,offering.getInterestRate());
+		super(MeritBank.getNextAccountNumber(),balance,offering.getInterestRate());
 		this.offering = offering;
 		this.balance = balance;
 	}
 	
-
-	public double getBalance() {
-		return this.balance;
-	}
+	//Need to override deposit and withdraw.
 	
-	public double getInterestRate() {
-		return this.offering.getInterestRate();
+	public static CDAccount readFromString(String accountData) {
+		
+		return null;
 	}
 	
 	public int getTerm() {
 		return this.offering.getTerm();
 	}
+	
+	public boolean deposit(Date date, int term) {
+		
+	}
+	@Override
+	public String toString() {
+		return "CDAccount [balance=" + balance + ", Offering Term =" + offering.getTerm() + "]";
+	}
 
-	public Date getStartDate() {
-		return this.date;
-	}
 	
-	public long getAccountNumber() {
-		return super.getAccountNumber();
-	}
-	
-	public double futureValue() {
-		return super.futureValue(this.offering.getTerm());
-	}
 }
 

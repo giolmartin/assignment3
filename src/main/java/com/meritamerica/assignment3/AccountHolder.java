@@ -13,7 +13,7 @@ package com.meritamerica.assignment3;
  * -Savings Account
  *
  */
-public class AccountHolder {
+public class AccountHolder implements Comparable<AccountHolder>{
 
 	private static final double MAX_BALANCE_AMOUNT = 250000;
 	
@@ -122,7 +122,7 @@ public class AccountHolder {
 	public CheckingAccount addCheckingAccount(CheckingAccount checkingAccount) {
 		totalB  = totalB + 	checkingAccount.getBalance() ;	
 		
-		if (totalB < 250000) {
+		if (totalB < MAX_BALANCE_AMOUNT) {
 		if(counterC == this.amountCheckingAccounts.length) {
 			 CheckingAccount[] newCheckingAccounts = new CheckingAccount[counterC + 1];
 			 for(int i = 0 ; i < counterC  ; i++) {
@@ -170,7 +170,7 @@ public class AccountHolder {
 	/** Receives a savingsAccount and stores it into a SavingsAccount[]*/
 	public SavingsAccount addSavingsAccount(SavingsAccount savingsAccount) {
 		
-		totalB = 	totalB + savingsAccount.getBalance() ;
+		totalB = totalB + savingsAccount.getBalance() ;
 		
 		
 		if(totalB < MAX_BALANCE_AMOUNT) {
@@ -269,9 +269,14 @@ public class AccountHolder {
 						"SSN: " + this.ssn + "\n" +
 						"Checkings Balance: $" + getCheckingBalance() + "\n" +
 						"Savings Balance: $" + getSavingsBalance() + "\n" +
-						"CD Accounts Balance: $" + getCDBalance() + "\n" +
+						"CD Accounts Balance: $" + getCDBalance() + " " +   
 						"Total Balance: $" + getCombinedBalance();
 		return client;
+	}
+	@Override
+	public int compareTo(AccountHolder o) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 

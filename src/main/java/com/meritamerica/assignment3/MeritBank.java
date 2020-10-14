@@ -51,6 +51,7 @@ public class MeritBank {
 	}
 	
 	public static long getNextAccountNumber() {
+		
 		return 0;
 	}
 	public static double totalBalances() {

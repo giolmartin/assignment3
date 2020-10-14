@@ -1,20 +1,20 @@
 package com.meritamerica.assignment3;
 
-
+import java.util.Date;
 
 public class BankAccount {
 	
 	private double  balance ;
-	static double interestRate;
-	 long accountNumber;
-	 double futureValue;
-	 double accountTotal;
-	private MeritBank m = new MeritBank();
+	private static double interestRate;
+	private long accountNumber;
+	private double futureValue;
+	private double accountTotal;
+	private Date date;
+	
 	
 	 BankAccount(double balance, double interestRate){
 		this.balance = balance;
 		this.interestRate = interestRate;
-	
 	}
 	
 	BankAccount(long accountNumber, double balance, double interestRate){
@@ -55,11 +55,16 @@ public class BankAccount {
 			return false;	
 	}
 	
+	
 	public double futureValue(int years) {
 		this.futureValue = balance * Math.pow((1+ interestRate ), years);
 		return this.futureValue;
 	}
 
+	public Date getStartDate() {
+		return this.date;
+	}
+	
 	public String toString() {
 		return "";
 	}
