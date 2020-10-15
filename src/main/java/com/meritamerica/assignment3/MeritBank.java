@@ -10,12 +10,14 @@ public class MeritBank {
 	private static AccountHolder[] accounts = new AccountHolder[0];
 	private static CDOffering[] cdOfferings;
 	private static ArrayList<String> values = new ArrayList<String>();
+	private static AccountHolder[] sortedAccounts = new AccountHolder[5];
 	
 	private static int counter = 0;
 	private static CDOffering bestCDOffering;
 	private static CDOffering secondBestCDOffering;
-	private static int counterA = 0;
-	private static int counterCD = 0;
+	private static int counterA = 0;//counter accounts at addAccountHolder()
+	private static int counterCD = 0;//counter CD not used
+	private static int counterAH = 0;//Counter used for sortedAccounts
 	private static double totalBalance = 0;
 	
 	public static void addAccountHolder(AccountHolder accountHolder) {
@@ -67,9 +69,7 @@ public class MeritBank {
 		return 0;
 	}
 	
-	public static void sortAccountHolders() {
-		
-	}
+	
 	public static boolean readFromFile(String fileName) {
 		
 		File file = new File(fileName);
@@ -87,7 +87,7 @@ public class MeritBank {
 		 * +++>Amount savings account
 		 * --->savings account(account number, balance, interest rate, date )
 		 * +++>Amount CDAccounts 
-		 * --->cdAccounts(account number, balance, interest rate, term, date)
+		 * --->cdAccounts(account number, balance, interest rate, date, term)
 		 * 
 		 */
 			String line;
@@ -96,23 +96,19 @@ public class MeritBank {
 			counter++;								//Amount of items on list.
 			}
 			
+			CheckingAccount.readFromString("9,1000,0.1, 10/10/2020"); // used to test readFroMString .. Working, at least the reading. 
+			SavingsAccount.readFromString("2,100000,0.3, 1/1/2020");
+			CDAccount.readFromString("1,2000,0.3,10/04/1991,5");
+			/*
 			CDOffering.readFromString(values.get(2));
 			
-			CheckingAccount.readFromString("9,1000,0.1,10/10/2020");
-			
-			
-		
-			
-			
-			
-			
-			//	for(String st:values) {
-		//		System.out.print("Counter # " + counter --+ " ");
-		//		System.out.println(st);
-		//	}
+				for(String st:values) {
+				System.out.print("Counter # " + counter --+ " ");
+				System.out.println(st);
+			}
 					
 			System.out.println(counter);
-			
+			*/
 			return true;
 		
 		} catch(IOException e ){
@@ -126,8 +122,22 @@ public class MeritBank {
 		return true;
 	}
 	
-	public static AccountHolder[] sortAccountHolder() {
-		return null;
+	public static AccountHolder[] sortAccountHolders() {
+		int index = 0;
+		double balance = 0;
+		counterAH = accounts.length;
+		int sortedCounter = 0;
+		while(counterAH-- > 0) {
+			for(int i = 0; i < accounts.length; i++) {
+				if((balance = accounts[index].getCombinedBalance()) > accounts[i].getCombinedBalance()) {
+					index = i;
+				}
+				
+			}
+			sortedAccounts[sortedCounter++] = accounts[index];
+			
+		}
+		return sortedAccounts;
 	}
 	public static void setNextAccountNumber(long nextAccountNumber) {
 		

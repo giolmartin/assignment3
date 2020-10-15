@@ -25,11 +25,11 @@ public class AccountHolder implements Comparable<AccountHolder>{
 	
 	
 	
-	private CheckingAccount[] amountCheckingAccounts = new CheckingAccount[1];
+	private CheckingAccount[] amountCheckingAccounts = new CheckingAccount[0];
 	private CheckingAccount clientCheckingAccount;
 	private double checkingBalance = 0;
 	
-	private SavingsAccount[] amountSavingsAccounts = new SavingsAccount[1];
+	private SavingsAccount[] amountSavingsAccounts = new SavingsAccount[0];
 	private SavingsAccount clientSavingsAccount;
 	private double savingsBalance = 0;
 	

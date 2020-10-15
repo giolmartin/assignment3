@@ -1,34 +1,39 @@
 package com.meritamerica.assignment3;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class BankAccount {
 	
 	private double  balance ;
-	private static double interestRate;
+	private double interestRate;
 	private long accountNumber;
 	private double futureValue;
 	private double accountTotal;
 	private Date date;
-	
+	private int term;
 	
 	 BankAccount(double balance, double interestRate){
 		this.balance = balance;
 		this.interestRate = interestRate;
 	}
 	
-	BankAccount(long accountNumber, double balance, double interestRate, String date){
+	 BankAccount(long accountNumber, double balance, double interestRate){
+		 this.accountNumber = accountNumber;
+		 this.balance = balance;
+		 this.interestRate = interestRate;
+	 }
+	BankAccount(long accountNumber, double balance, double interestRate, Date date){
 		this.accountNumber = accountNumber;
 		this.balance = balance;
 		this.interestRate = interestRate;
-		this.date = dateAccountOpened(date);
+		this.date= date;
 	}
 	
 
 	public long getAccountNumber() {
-		System.out.println("AccountNumber");
 		return this.accountNumber;
 	}
 	
@@ -40,27 +45,29 @@ public class BankAccount {
 	}
 	
 	public boolean withdraw(double amount) {
-	/*	this.balance = this.client.getCombinedBalance();//create in account Balance
 		if((this.balance - amount) >= 0) {
 			this.balance = this.balance - amount;
 			return true;
-		} else
-	*/		return false;
+		} else{
+			System.out.println("Could not withdraw the amount. ");
+			return false;
+		}
+			
 	}
 	
 	public boolean deposit(double amount) {
-		if((this.balance + amount) <= 250000) {
+		if(((this.balance + amount) <= 250000) && amount > 0) {
 			System.out.println("Deposit bank: "+ amount);
 			this.balance = this.balance + amount;
 			return true;
 		} else 
-			System.out.println(" more than 250000");
+			System.out.println("Unable to deposit.");
 			return false;	
 	}
 	
 	
-	public double futureValue(int years) {
-		this.futureValue = balance * Math.pow((1+ interestRate ), years);
+	public double futureValue(int term) {
+		this.futureValue = this.balance * Math.pow((1+ interestRate ), term);
 		return this.futureValue;
 	}
 
@@ -68,10 +75,18 @@ public class BankAccount {
 	//public date
 	
 	public  Date dateAccountOpened(String string) {
-			DateFormat startDate = new SimpleDateFormat("yyyy/MM/dd");
-	        Date date = new Date(string);
-	        System.out.println(startDate.format(date));
-	        return date;
+			try {
+			DateFormat startDate = new SimpleDateFormat("dd/MM/yyyy"); //sets format
+	        Date date = (Date)startDate.parse(string); //converts to date
+	      //String s = startDate.format(date);   // reformats back to a string so output is desired, 
+	      //System.out.println("Date: " + s);
+	      //Date d = (Date) startDate.parse(string);
+	       this.date = date;
+	       return this.date;				// returns correct date, but with hrs/min/sec at 00:00:00 didnt know how to eliminate this. 
+			} catch(ParseException e){
+				System.out.println();
+			}
+			return this.date;
 	}
 	
 	public  Date getOpenedOn() {
