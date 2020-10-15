@@ -54,12 +54,13 @@ public class CDAccount extends BankAccount {
 		interestRate = values[2];
 		term = (int) values[4];
 		
+		/*
 		System.out.println("Account: " + accountNumber + "\n" +
 				"Balance: " + balance + "\n" + 
 				"Interest Rate: " + interestRate + "\n" + 
 				"Date: " + date + "\n" + 
 				"Term: " + term);
-
+		*/
 		return null;
 	}
 	

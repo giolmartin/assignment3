@@ -48,6 +48,7 @@ public class CheckingAccount extends BankAccount{
 			throw e;
 			
 		}
+		
 		// created instance to be able to call .dateAccountOpened 
 		CheckingAccount ch = new CheckingAccount(); 
 		date = ch.dateAccountOpened(trans[3]);
@@ -58,12 +59,14 @@ public class CheckingAccount extends BankAccount{
 		 //created a checking account with the inserted string variables -- pases test
 		ch = new CheckingAccount(accountNumber, balance, 
 				interestRate, date);
-		
+	
+		/*
 		System.out.println("Account: " + accountNumber + "\n" +
 							"Balance: " + balance + "\n" + 
 							"Interest Rate: " + interestRate + "\n" + 
 							"Date: " + date);
-		
+	
+		*/
 		return ch;
 		
 		//BankAccount b  ;

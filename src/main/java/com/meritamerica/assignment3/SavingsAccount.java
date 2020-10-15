@@ -48,12 +48,12 @@ public class SavingsAccount extends BankAccount{
 		interestRate = values[2];
 		
 		s = new SavingsAccount(accountNumber, balance, interestRate, date);
-		
+		/*
 		System.out.println("Account: " + accountNumber + "\n" +
 				"Balance: " + balance + "\n" + 
 				"Interest Rate: " + interestRate + "\n" + 
 				"Date: " + date);
-		
+		*/
 		return s;
 	
 		/*BankAccount b  ;

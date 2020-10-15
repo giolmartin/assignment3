@@ -11,8 +11,8 @@ public class MeritBank {
 	private static CDOffering[] cdOfferings;
 	private static ArrayList<String> values = new ArrayList<String>();
 	private static AccountHolder[] sortedAccounts = new AccountHolder[5];
-	
-	private static int counter = 0;
+	private static long accountNumber;
+	private static int index = 0;
 	private static CDOffering bestCDOffering;
 	private static CDOffering secondBestCDOffering;
 	private static int counterA = 0;//counter accounts at addAccountHolder()
@@ -80,25 +80,103 @@ public class MeritBank {
 		 * +++>CdOfferings: 2 / unique 
 		 * -->cdOffering1(term, interest)
 		 * -->cdOffering2(term,interest)
-		 * +++>Amount count Holders (repeat) 
-		 * --->Account holder information(Last, middle, first, ssn)
-		 * +++> amount checking account 
-		 * ---> checking account(account number, balance, interest rate, date )
-		 * +++>Amount savings account
-		 * --->savings account(account number, balance, interest rate, date )
-		 * +++>Amount CDAccounts 
-		 * --->cdAccounts(account number, balance, interest rate, date, term)
+		 * +++>Amount account Holders (repeat) 
+		 * 		--->Account holder information(Last, middle, first, ssn)//unique
+		 * 		+++> amount checking account 
+		 * 		---> checking account(account number, balance, interest rate, date )
+		 * 		+++>Amount savings account
+		 * 		--->savings account(account number, balance, interest rate, date )
+		 * 		+++>Amount CDAccounts 
+		 * 		--->cdAccounts(account number, balance, interest rate, date, term)
 		 * 
 		 */
+			int cdofferingsCounter; 
+			int accountInfo;
+			int checkingCounter;
+			int accountHolderCounter;
+			int savingsCounter;
+			int cdAccountCounter;
+			
 			String line;
 			while((line = bR.readLine()) != null) {	//Passing down values into list
 			    values.add(line);					//Values = ArrayList
-			counter++;								//Amount of items on list.
+			//counter++;								//Amount of items on list.
 			}
+			int actualSize = values.size();
+			actualSize = actualSize + 1;
+			// position 0 in my values list is always the amount of account holders.
+			System.out.println("Array size: " + actualSize );
+			//while(index != values.size()) {
+				
+				try {
+					accountNumber = Long.parseLong(values.get(index));
+					System.out.println("Account: " + accountNumber);
+					index++;         // <----------------------------global index of the array.
+					cdofferingsCounter = Integer.parseInt(values.get(index)); //amount of cdofferings
+					System.out.println("CDOfferings: " + cdofferingsCounter);
+					index++;
+					//System.out.println(index);
+					for(int i = index ; i < cdofferingsCounter + index; i ++) { //runs the amount of cd offerings
+						CDOffering.readFromString(values.get(i));      //<--------------------sends offerings to be created
+						System.out.println("Counter: " + index + "Offering: " + values.get(i));
+					} 
+					index += cdofferingsCounter ;
+					accountHolderCounter = Integer.parseInt(values.get(index));
+					index++;
+					System.out.println("Counter: " + accountHolderCounter);
+					//while(index < (actualSize - 1)) {
+					for(int i = index; i < accountHolderCounter + index; i++) {
+						AccountHolder.readFromString(values.get(index));
+						System.out.println("Account Info: " + values.get(index));
+						index++; 
+						checkingCounter = Integer.parseInt(values.get(index));
+						System.out.println("Checking: " + checkingCounter);
+						index++;
+						if(checkingCounter != 0) {
+							for (int j = index ; j < checkingCounter + index ; j++) {	
+								CheckingAccount.readFromString(values.get(j));
+								System.out.println("Checking Info: " + values.get(j));
+							}
+						} 
+						index += checkingCounter;
+						savingsCounter = Integer.parseInt(values.get(index));
+						index++;
+						System.out.println("Savings: " + savingsCounter);
+						if(savingsCounter != 0) {
+							for(int k = index; k < savingsCounter + index; k++) {
+								System.out.println("Savings Info: " + values.get(k));
+								SavingsAccount.readFromString(values.get(k));
+							}
+						}
+						index += savingsCounter;
+						cdAccountCounter = Integer.parseInt(values.get(index));
+						System.out.println("CD Counter: " + cdAccountCounter);
+						index++;
+						if(cdAccountCounter != 0) {
+							for(int x = index; x < cdAccountCounter + index; x++) {
+								System.out.println("CdAccount: " + values.get(x));
+								CDAccount.readFromString(values.get(x));
+							}
+						}
+						index += cdAccountCounter;
+						System.out.println("Index: " + index);
+					
+					}
+					System.out.println("Index: " + index);
+					
+					//for(int)
+					//}	
+				}catch(NumberFormatException e) {
+					throw e;
+				} 
+			//}
 			
-			CheckingAccount.readFromString("9,1000,0.1, 10/10/2020"); // used to test readFroMString .. Working, at least the reading. 
-			SavingsAccount.readFromString("2,100000,0.3, 1/1/2020");
-			CDAccount.readFromString("1,2000,0.3,10/04/1991,5");
+			
+			
+			
+			//CheckingAccount.readFromString("9,1000,0.1, 10/10/2020"); // used to test readFroMString .. Working, at least the reading. 
+			//SavingsAccount.readFromString("2,100000,0.3, 1/1/2020");
+			//CDAccount.readFromString("1,2000,0.3,10/04/1991,5");
 			/*
 			CDOffering.readFromString(values.get(2));
 			

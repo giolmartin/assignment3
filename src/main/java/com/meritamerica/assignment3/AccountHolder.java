@@ -262,7 +262,9 @@ public class AccountHolder implements Comparable<AccountHolder>{
 		this.combinedBalance	= getCheckingBalance()+ getSavingsBalance()+ getCDBalance();
 		return combinedBalance;
 	}
-	
+	public static AccountHolder readFromString(String accountHolderData) {
+		return null;
+	}
 
 	public String toString() {
 		String client = "Name: " + this.firstName + " " + this.middleName + " " + this.lastName + "\n" + 
