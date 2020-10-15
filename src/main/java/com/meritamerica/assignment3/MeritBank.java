@@ -1,6 +1,7 @@
 package com.meritamerica.assignment3;
 
-import java.io.File;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -8,7 +9,9 @@ public class MeritBank {
 	
 	private static AccountHolder[] accounts = new AccountHolder[0];
 	private static CDOffering[] cdOfferings;
+	private static ArrayList<String> values = new ArrayList<String>();
 	
+	private static int counter = 0;
 	private static CDOffering bestCDOffering;
 	private static CDOffering secondBestCDOffering;
 	private static int counterA = 0;
@@ -67,7 +70,67 @@ public class MeritBank {
 	public static void sortAccountHolders() {
 		
 	}
-	public static void readFromFile(String string) {
+	public static boolean readFromFile(String fileName) {
+		
+		File file = new File(fileName);
+		
+		try (BufferedReader bR = new BufferedReader(new FileReader(file)) ){
+		/*
+		 * Next bank Account: /unique
+		 * +++>CdOfferings: 2 / unique 
+		 * -->cdOffering1(term, interest)
+		 * -->cdOffering2(term,interest)
+		 * +++>Amount count Holders (repeat) 
+		 * --->Account holder information(Last, middle, first, ssn)
+		 * +++> amount checking account 
+		 * ---> checking account(account number, balance, interest rate, date )
+		 * +++>Amount savings account
+		 * --->savings account(account number, balance, interest rate, date )
+		 * +++>Amount CDAccounts 
+		 * --->cdAccounts(account number, balance, interest rate, term, date)
+		 * 
+		 */
+			String line;
+			while((line = bR.readLine()) != null) {	//Passing down values into list
+			    values.add(line);					//Values = ArrayList
+			counter++;								//Amount of items on list.
+			}
+			
+			CDOffering.readFromString(values.get(2));
+			
+			CheckingAccount.readFromString("9,1000,0.1,10/10/2020");
+			
+			
+		
+			
+			
+			
+			
+			//	for(String st:values) {
+		//		System.out.print("Counter # " + counter --+ " ");
+		//		System.out.println(st);
+		//	}
+					
+			System.out.println(counter);
+			
+			return true;
+		
+		} catch(IOException e ){
+		System.out.println("File not found");
+		return false;
+			} 
 		
 	}
+	
+	public static boolean writeToFile(String fileName) {
+		return true;
+	}
+	
+	public static AccountHolder[] sortAccountHolder() {
+		return null;
+	}
+	public static void setNextAccountNumber(long nextAccountNumber) {
+		
+	}
+	
 }

@@ -1,5 +1,7 @@
 package com.meritamerica.assignment3;
 
+import java.util.Date;
+
 public class CDAccount extends BankAccount {
 
 	private double balance;
@@ -8,7 +10,7 @@ public class CDAccount extends BankAccount {
 	
 	
 	CDAccount(CDOffering offering, double balance){
-		super(MeritBank.getNextAccountNumber(),balance,offering.getInterestRate());
+		super(MeritBank.getNextAccountNumber(),balance,offering.getInterestRate(), "");
 		this.offering = offering;
 		this.balance = balance;
 	}
@@ -24,9 +26,12 @@ public class CDAccount extends BankAccount {
 		return this.offering.getTerm();
 	}
 	
-	public boolean deposit(Date date, int term) {
-		
+	@Override
+	public boolean deposit(double amount) {
+		return true;
 	}
+	
+	
 	@Override
 	public String toString() {
 		return "CDAccount [balance=" + balance + ", Offering Term =" + offering.getTerm() + "]";

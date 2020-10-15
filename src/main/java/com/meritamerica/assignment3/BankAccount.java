@@ -1,5 +1,7 @@
 package com.meritamerica.assignment3;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class BankAccount {
@@ -17,10 +19,11 @@ public class BankAccount {
 		this.interestRate = interestRate;
 	}
 	
-	BankAccount(long accountNumber, double balance, double interestRate){
+	BankAccount(long accountNumber, double balance, double interestRate, String date){
 		this.accountNumber = accountNumber;
 		this.balance = balance;
 		this.interestRate = interestRate;
+		this.date = dateAccountOpened(date);
 	}
 	
 
@@ -61,10 +64,28 @@ public class BankAccount {
 		return this.futureValue;
 	}
 
-	public Date getStartDate() {
+	
+	//public date
+	
+	public  Date dateAccountOpened(String string) {
+			DateFormat startDate = new SimpleDateFormat("yyyy/MM/dd");
+	        Date date = new Date(string);
+	        System.out.println(startDate.format(date));
+	        return date;
+	}
+	
+	public  Date getOpenedOn() {
 		return this.date;
 	}
 	
+	public static BankAccount readFromString() {
+		
+		return null;
+	}
+	
+	public String writeToString() {
+		return"";
+	}
 	public String toString() {
 		return "";
 	}
