@@ -126,6 +126,7 @@ public class MeritBank {
 					System.out.println("Counter: " + accountHolderCounter);
 					//while(index < (actualSize - 1)) {
 					for(int i = index; i < accountHolderCounter + index; i++) {
+						if (index == values.size())break; //checks to see if the index is at the end of the array.
 						AccountHolder.readFromString(values.get(index));
 						System.out.println("Account Info: " + values.get(index));
 						index++; 
