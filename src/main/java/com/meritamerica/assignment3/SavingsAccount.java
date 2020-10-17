@@ -10,7 +10,7 @@ public class SavingsAccount extends BankAccount{
 	private static Date date;
 	private static long accountNumber; 
 	private static double balance;
-	private static double interestRate ;
+	private static double interestRate = 0.01 ;
 	
 	SavingsAccount() {
 		super(MeritBank.getNextAccountNumber(),balance, interestRate);
@@ -23,7 +23,8 @@ public class SavingsAccount extends BankAccount{
 	}
 	
 	public static SavingsAccount readFromString(String accountData) {
-
+		double balance;
+		double interestRate;
 		SavingsAccount savings = new SavingsAccount();
 
 		try {

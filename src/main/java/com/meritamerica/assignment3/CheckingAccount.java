@@ -7,12 +7,12 @@ import java.util.Date;
 
 public class CheckingAccount extends BankAccount{
 	
-	private static double interestRate = 0;
-	private static String[] array = new String[4];
+	private static double interestRate = 0.0001;
+	
 	private static Date date ;
 	private static long accountNumber;
 	private static double balance;
-	private static CheckingAccount checking;
+	
 
 	CheckingAccount() {
 		super(MeritBank.getNextAccountNumber(),balance,interestRate, date);
@@ -30,17 +30,16 @@ public class CheckingAccount extends BankAccount{
 	
 	
 	public static CheckingAccount readFromString(String accountData) {
-		
+		double balance;
+		double interestRate;
 		
 		CheckingAccount checking = new CheckingAccount();
 		String[] values = accountData.split(",");
 		try {
-			
-				
-				
+		
 				accountNumber = Long.parseLong(values[0]);
-				balance = Double.parseDouble(values[1]);
-				interestRate = Double.parseDouble(values[2]);
+				 balance = Double.parseDouble(values[1]);
+				 interestRate = Double.parseDouble(values[2]);
 				date = checking.dateAccountOpened(values[3]);
 											
 		} catch (NumberFormatException e) {

@@ -8,10 +8,11 @@ import java.util.Random;
 public class MeritBank {
 	
 	private static AccountHolder[] accounts = new AccountHolder[0];
-	private static CDOffering[] cdOfferings;
-	private static ArrayList<String> values = new ArrayList<String>();
+	private static CDOffering[] cdOfferings = new CDOffering[3
+	                                                         ];
+	
 	private static AccountHolder[] sortedAccounts = new AccountHolder[5];
-	private static long accountNumber;
+	private static  long accountNumber = 1;
 	private static int index = 0;
 	private static CDOffering bestCDOffering;
 	private static CDOffering secondBestCDOffering;
@@ -19,6 +20,11 @@ public class MeritBank {
 	private static int counterCD = 0;//counter CD not used
 	private static int counterAH = 0;//Counter used for sortedAccounts
 	private static double totalBalance = 0;
+	
+	
+	
+	
+	
 	
 	public static void addAccountHolder(AccountHolder accountHolder) {
 		if(counterA == accounts.length) {
@@ -37,7 +43,9 @@ public class MeritBank {
 	}
 	
 	public static CDOffering[] getCDOfferings() {
-		return cdOfferings;	
+		
+		
+		return  cdOfferings;	
 	}
 	
 	public static CDOffering getBestCDOffering(double depositAmount) {
@@ -55,9 +63,12 @@ public class MeritBank {
 		cdOfferings = offerings;
 	}
 	
-	public static long getNextAccountNumber() {
+	public  static long getNextAccountNumber() {
+		return accountNumber ;
+	}
+	public static void setAccountNumber(Long accountN) {
 		
-		return 0;
+		accountNumber = accountN;
 	}
 	public static double totalBalances() {
 		double tB = 0;
@@ -73,7 +84,15 @@ public class MeritBank {
 	public static boolean readFromFile(String fileName) {
 		
 		File file = new File(fileName);
+		ArrayList<String> values = new ArrayList<String>();
+		int cdofferingsCounter; 
 		
+		int checkingCounter;
+		int accountHolderCounter;
+		int savingsCounter;
+		int cdAccountCounter;
+		int index = 0;
+		long accountN;
 		try (BufferedReader bR = new BufferedReader(new FileReader(file)) ){
 		/*
 		 * Next bank Account: /unique
@@ -90,36 +109,35 @@ public class MeritBank {
 		 * 		--->cdAccounts(account number, balance, interest rate, date, term)
 		 * 
 		 */
-			int cdofferingsCounter; 
-			int accountInfo;
-			int checkingCounter;
-			int accountHolderCounter;
-			int savingsCounter;
-			int cdAccountCounter;
+			
+			
 			
 			String line;
 			while((line = bR.readLine()) != null) {	//Passing down values into list
 			    values.add(line);					//Values = ArrayList
 			//counter++;								//Amount of items on list.
 			}
-			int actualSize = values.size();
-			actualSize = actualSize + 1;
+			
 			// position 0 in my values list is always the amount of account holders.
 			//System.out.println("Array size: " + actualSize );
 			//while(index != values.size()) {
 				
+					
+					accountN = Long.parseLong(values.get(index));
+					setAccountNumber(accountN);
+					System.out.println("Account: " + accountN);
 				
-					accountNumber = Long.parseLong(values.get(index));
-					//System.out.println("Account: " + accountNumber);
 					index++;         // <----------------------------global index of the array.
 					cdofferingsCounter = Integer.parseInt(values.get(index)); //amount of cdofferings
 					//System.out.println("CDOfferings: " + cdofferingsCounter);
 					index++;
-					//System.out.println(index);
+					
 					for(int i = index ; i < cdofferingsCounter + index; i ++) { //runs the amount of cd offerings
-						CDOffering.readFromString(values.get(i));      //<--------------------sends offerings to be created
+						CDOffering.readFromString(values.get(i)); 
+						//<--------------------sends offerings to be created
 					//	System.out.println("Counter: " + index + "Offering: " + values.get(i));
 					} 
+					
 					index += cdofferingsCounter ;
 					accountHolderCounter = Integer.parseInt(values.get(index));
 					index++;
@@ -136,48 +154,53 @@ public class MeritBank {
 						if(checkingCounter != 0) {
 							for (int j = index ; j < checkingCounter + index ; j++) {	
 								CheckingAccount.readFromString(values.get(j));
-								System.out.println("Checking Info: " + values.get(j));
+							
 							}
 						} 
 						index += checkingCounter;
 						savingsCounter = Integer.parseInt(values.get(index));
 						index++;
-					//	System.out.println("Savings: " + savingsCounter);
+					
 						if(savingsCounter != 0) {
 							for(int k = index; k < savingsCounter + index; k++) {
-					//			System.out.println("Savings Info: " + values.get(k));
+					
 								SavingsAccount.readFromString(values.get(k));
 							}
 						}
 						index += savingsCounter;
 						cdAccountCounter = Integer.parseInt(values.get(index));
-					//	System.out.println("CD Counter: " + cdAccountCounter);
+				
 						index++;
 						if(cdAccountCounter != 0) {
 							for(int x = index; x < cdAccountCounter + index; x++) {
-					//			System.out.println("CdAccount: " + values.get(x));
+					
 								CDAccount.readFromString(values.get(x));
 							}
 						}
+						System.out.println("For " + index);
 						index += cdAccountCounter;
-					//	System.out.println("Index: " + index);
-					
+						System.out.println("For " + index);
+						System.out.println("Array " + values.size());
 					}
-					System.out.println("Index: " + index);
 					
-					//for(int)
-					//}	
-					System.out.println("True");
+					
+				
+					
 					
 				}catch(NumberFormatException e) {
 					
 					return false;
-					//throw e;
+					
 				} 
+		catch(NullPointerException n) {
+			System.out.println(n.getMessage());
+			return false;
+		}
 		 catch(IOException e ){
 			e.getStackTrace();
 		System.out.println("File not found");
 			}
+		
 		return true; 
 	}
 	
@@ -186,21 +209,7 @@ public class MeritBank {
 	}
 	
 	public static AccountHolder[] sortAccountHolders() {
-		int index = 0;
-		double balance = 0;
-		counterAH = accounts.length;
-		int sortedCounter = 0;
-		while(counterAH-- > 0) {
-			for(int i = 0; i < accounts.length; i++) {
-				if((balance = accounts[index].getCombinedBalance()) > accounts[i].getCombinedBalance()) {
-					index = i;
-				}
-				
-			}
-			sortedAccounts[sortedCounter++] = accounts[index];
-			
-		}
-		return sortedAccounts;
+		return null;
 	}
 	public static void setNextAccountNumber(long nextAccountNumber) {
 		

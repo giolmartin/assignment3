@@ -31,15 +31,15 @@ public class CDOffering {
   		String[] values = cdOfferingDataString.split(",");
 		try {
 			
-			
-			
 			term = Integer.parseInt(values[0]);
 			interestRate = Double.parseDouble(values[1]);
-			offering = new CDOffering(term, interestRate);
+			
 			
 		}catch (NumberFormatException e) {
 			throw e;
 		}
+		
+		offering = new CDOffering(term, interestRate);
 		
 		//term = t;
 		//interestRate = iR;

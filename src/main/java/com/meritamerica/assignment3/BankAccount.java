@@ -49,7 +49,7 @@ public class BankAccount {
 			this.balance = this.balance - amount;
 			return true;
 		} else{
-			System.out.println("Could not withdraw the amount. ");
+			
 			return false;
 		}
 			
@@ -57,11 +57,9 @@ public class BankAccount {
 	
 	public boolean deposit(double amount) {
 		if(((this.balance + amount) <= 250000) && amount > 0) {
-			System.out.println("Deposit bank: "+ amount);
 			this.balance = this.balance + amount;
 			return true;
 		} else 
-			System.out.println("Unable to deposit.");
 			return false;	
 	}
 	

@@ -1,5 +1,6 @@
 package com.meritamerica.assignment3;
 
+import java.io.IOException;
 
 /**
  * 
@@ -17,10 +18,10 @@ public class AccountHolder implements Comparable<AccountHolder>{
 
 	private static final double MAX_BALANCE_AMOUNT = 250000;
 	
-	private String firstName = "";
-	private String middleName = "";
-	private String lastName = "";
-	private String ssn = "";
+	private  String firstName = "";
+	private  String middleName = "";
+	private  String lastName = "";
+	private  String ssn = "";
 	
 	
 	
@@ -262,8 +263,24 @@ public class AccountHolder implements Comparable<AccountHolder>{
 		this.combinedBalance	= getCheckingBalance()+ getSavingsBalance()+ getCDBalance();
 		return combinedBalance;
 	}
-	public static AccountHolder readFromString(String accountHolderData) {
-		return null;
+	
+	public  static AccountHolder readFromString(String accountHolderData) {
+		
+		AccountHolder account = new AccountHolder();
+		String[] values = accountHolderData.split(",");
+		
+		 //try {
+		/*	lastName = values[0];
+			middleName = values[1];
+			firstName = values[2];
+			ssn = values[3];
+		*/	
+		//} catch( IO s) {
+			//throw s;
+		//}
+		
+		
+		return new AccountHolder(values[2], values[1], values[0], values[3]);
 	}
 
 	public String toString() {

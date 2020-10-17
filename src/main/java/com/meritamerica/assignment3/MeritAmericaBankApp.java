@@ -6,6 +6,11 @@ public class MeritAmericaBankApp {
 	public static void main(String[] args) {
 		
 		MeritBank.readFromFile("src/test/testMeritBank_good.txt");
+		//boolean result = MeritBank.readFromFile("src/test/testMeritBank_good.txt");
+		System.out.println(MeritBank.getNextAccountNumber());
+		System.out.println(MeritBank.getCDOfferings().length);
+		
+		//System.out.println(result);
 		
 		  //System.out.println("Balance: " + accountHolder.getCheckingBalance());
 		 
