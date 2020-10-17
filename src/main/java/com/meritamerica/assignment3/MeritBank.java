@@ -105,33 +105,33 @@ public class MeritBank {
 			int actualSize = values.size();
 			actualSize = actualSize + 1;
 			// position 0 in my values list is always the amount of account holders.
-			System.out.println("Array size: " + actualSize );
+			//System.out.println("Array size: " + actualSize );
 			//while(index != values.size()) {
 				
-				try {
+				
 					accountNumber = Long.parseLong(values.get(index));
-					System.out.println("Account: " + accountNumber);
+					//System.out.println("Account: " + accountNumber);
 					index++;         // <----------------------------global index of the array.
 					cdofferingsCounter = Integer.parseInt(values.get(index)); //amount of cdofferings
-					System.out.println("CDOfferings: " + cdofferingsCounter);
+					//System.out.println("CDOfferings: " + cdofferingsCounter);
 					index++;
 					//System.out.println(index);
 					for(int i = index ; i < cdofferingsCounter + index; i ++) { //runs the amount of cd offerings
 						CDOffering.readFromString(values.get(i));      //<--------------------sends offerings to be created
-						System.out.println("Counter: " + index + "Offering: " + values.get(i));
+					//	System.out.println("Counter: " + index + "Offering: " + values.get(i));
 					} 
 					index += cdofferingsCounter ;
 					accountHolderCounter = Integer.parseInt(values.get(index));
 					index++;
-					System.out.println("Counter: " + accountHolderCounter);
+					//System.out.println("Counter: " + accountHolderCounter);
 					//while(index < (actualSize - 1)) {
 					for(int i = index; i < accountHolderCounter + index; i++) {
-						if (index == values.size())break; //checks to see if the index is at the end of the array.
+						if (index == values.size())return true;; //checks to see if the index is at the end of the array.
 						AccountHolder.readFromString(values.get(index));
-						System.out.println("Account Info: " + values.get(index));
+					//	System.out.println("Account Info: " + values.get(index));
 						index++; 
 						checkingCounter = Integer.parseInt(values.get(index));
-						System.out.println("Checking: " + checkingCounter);
+					//	System.out.println("Checking: " + checkingCounter);
 						index++;
 						if(checkingCounter != 0) {
 							for (int j = index ; j < checkingCounter + index ; j++) {	
@@ -142,59 +142,43 @@ public class MeritBank {
 						index += checkingCounter;
 						savingsCounter = Integer.parseInt(values.get(index));
 						index++;
-						System.out.println("Savings: " + savingsCounter);
+					//	System.out.println("Savings: " + savingsCounter);
 						if(savingsCounter != 0) {
 							for(int k = index; k < savingsCounter + index; k++) {
-								System.out.println("Savings Info: " + values.get(k));
+					//			System.out.println("Savings Info: " + values.get(k));
 								SavingsAccount.readFromString(values.get(k));
 							}
 						}
 						index += savingsCounter;
 						cdAccountCounter = Integer.parseInt(values.get(index));
-						System.out.println("CD Counter: " + cdAccountCounter);
+					//	System.out.println("CD Counter: " + cdAccountCounter);
 						index++;
 						if(cdAccountCounter != 0) {
 							for(int x = index; x < cdAccountCounter + index; x++) {
-								System.out.println("CdAccount: " + values.get(x));
+					//			System.out.println("CdAccount: " + values.get(x));
 								CDAccount.readFromString(values.get(x));
 							}
 						}
 						index += cdAccountCounter;
-						System.out.println("Index: " + index);
+					//	System.out.println("Index: " + index);
 					
 					}
 					System.out.println("Index: " + index);
 					
 					//for(int)
 					//}	
-				}catch(NumberFormatException e) {
-					throw e;
-				} 
-			//}
-			
-			
-			
-			
-			//CheckingAccount.readFromString("9,1000,0.1, 10/10/2020"); // used to test readFroMString .. Working, at least the reading. 
-			//SavingsAccount.readFromString("2,100000,0.3, 1/1/2020");
-			//CDAccount.readFromString("1,2000,0.3,10/04/1991,5");
-			/*
-			CDOffering.readFromString(values.get(2));
-			
-				for(String st:values) {
-				System.out.print("Counter # " + counter --+ " ");
-				System.out.println(st);
-			}
+					System.out.println("True");
 					
-			System.out.println(counter);
-			*/
-			return true;
-		
-		} catch(IOException e ){
+				}catch(NumberFormatException e) {
+					
+					return false;
+					//throw e;
+				} 
+		 catch(IOException e ){
+			e.getStackTrace();
 		System.out.println("File not found");
-		return false;
-			} 
-		
+			}
+		return true; 
 	}
 	
 	public static boolean writeToFile(String fileName) {

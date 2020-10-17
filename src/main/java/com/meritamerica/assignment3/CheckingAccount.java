@@ -31,43 +31,42 @@ public class CheckingAccount extends BankAccount{
 	
 	public static CheckingAccount readFromString(String accountData) {
 		
-		String[] trans = new String[4] ;
-		double[] values = new double[4];
 		
+		CheckingAccount checking = new CheckingAccount();
+		String[] values = accountData.split(",");
 		try {
-			for(int i = 0; i < 4 ; i++) {
-				trans = accountData.split(",");
-				//System.out.println("trans: # "+ i + "   "+ trans[i] );
-				array[i] = trans[i];
-			}								//		 -->separate strings
-			for (int i = 0; i < 3 ; i ++) {					//<----separate strings
-				values[i] = Double.parseDouble(array[i]);
-			} //---> strings converted to doubles.
+			
+				
+				
+				accountNumber = Long.parseLong(values[0]);
+				balance = Double.parseDouble(values[1]);
+				interestRate = Double.parseDouble(values[2]);
+				date = checking.dateAccountOpened(values[3]);
+											
 		} catch (NumberFormatException e) {
 			
 			throw e;
 			
 		}
-		
-		// created instance to be able to call .dateAccountOpened 
-		CheckingAccount ch = new CheckingAccount(); 
-		date = ch.dateAccountOpened(trans[3]);
-		//System.out.println(date);
-		accountNumber = (long) values[0];
-		balance = values[1];
-		interestRate = values[2];
-		 //created a checking account with the inserted string variables -- pases test
-		ch = new CheckingAccount(accountNumber, balance, 
+		checking = new CheckingAccount(accountNumber, balance, 
 				interestRate, date);
+
+		// created instance to be able to call .dateAccountOpened 
+		 
+		
 	
+		 //created a checking account with the inserted string variables -- pases test
+		
 		/*
-		System.out.println("Account: " + accountNumber + "\n" +
+		System.out.println("Checking Account: " + accountNumber + "\n" +
 							"Balance: " + balance + "\n" + 
 							"Interest Rate: " + interestRate + "\n" + 
 							"Date: " + date);
 	
 		*/
-		return ch;
+		//if() {}
+		return checking;
+		
 		
 		//BankAccount b  ;
 		//b = new BankAccount((long) values[0], values[1], values[2]);

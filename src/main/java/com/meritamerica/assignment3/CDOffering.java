@@ -1,5 +1,7 @@
 package com.meritamerica.assignment3;
 
+import java.util.ArrayList;
+
 public class CDOffering {
 
 	private  static int term ;
@@ -10,29 +12,42 @@ public class CDOffering {
 		
 	}
 	
-	CDOffering(int term, double interestRate){
-		this.term = term;
-		this.interestRate = interestRate;
+	CDOffering(int t, double interest){
+		term = t;
+		interestRate = interest;
 	}
 	
 	public int getTerm() {
-		return this.term;
+		return term;
 	}
 	
 	public double getInterestRate() {
-		return this.interestRate;
+		return interestRate;
 	}
 	
 	public static CDOffering readFromString(String cdOfferingDataString) {
-		int t = 0;
-		double	iR = 0; 
-		term = t;
-		interestRate = iR;
+	
+  		CDOffering offering = new CDOffering();
+  		String[] values = cdOfferingDataString.split(",");
+		try {
+			
+			
+			
+			term = Integer.parseInt(values[0]);
+			interestRate = Double.parseDouble(values[1]);
+			offering = new CDOffering(term, interestRate);
+			
+		}catch (NumberFormatException e) {
+			throw e;
+		}
+		
+		//term = t;
+		//interestRate = iR;
 		//CDOffering offering = new CDOffering(t,iR);
 		//MeritBank.setCDOfferings(offering);
 		//System.out.println("Inside readFromString");
 		
-		return null;
+		return offering;
 	}
 	
 	

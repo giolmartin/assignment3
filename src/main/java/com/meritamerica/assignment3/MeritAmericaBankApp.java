@@ -7,8 +7,6 @@ public class MeritAmericaBankApp {
 		
 		MeritBank.readFromFile("src/test/testMeritBank_good.txt");
 		
-		 
-		// CheckingAccount c = accountHolder.addCheckingAccount(100);
 		  //System.out.println("Balance: " + accountHolder.getCheckingBalance());
 		 
 	/*	
@@ -17,6 +15,13 @@ public class MeritAmericaBankApp {
 		        	"",
 		        	"Manji",
 		        	"123456789");
+		        	new CDAccount();
+		new CheckingAccount();
+	
+		CDAccount cd = CDAccount.readFromString("1,1000,0.1,10/10/2020,5");
+		System.out.println(cd.getTerm());
+		 
+		 CheckingAccount c = CheckingAccount.readFromString("1,100,0.2,10/10/1011");
 		 
 		 System.out.println(accountHolder.getNumberOfCDAccounts());
 		 System.out.println(accountHolder.getNumberOfCheckingAccounts());

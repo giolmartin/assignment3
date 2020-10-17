@@ -1,5 +1,6 @@
 package com.meritamerica.assignment3;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class CDAccount extends BankAccount {
@@ -9,6 +10,7 @@ public class CDAccount extends BankAccount {
 	private static int term;
 	private static double interestRate;
 	private static String[] array = new String[5];
+	private static ArrayList<String> tran = new ArrayList<String>();
 	private static Date date;
 	private  static long accountNumber;
 	 
@@ -16,6 +18,9 @@ public class CDAccount extends BankAccount {
 	
 	
 	CDAccount(){
+		super(accountNumber, balance, interestRate, date);
+	}
+	CDAccount(long accountNumber, double balance, double interestRate, Date date, int term){
 		super(accountNumber, balance, interestRate, date);
 	}
 	CDAccount(CDOffering offering, double balance){
@@ -30,29 +35,25 @@ public class CDAccount extends BankAccount {
 	//Need to override deposit and withdraw.
 	
 	public static CDAccount readFromString(String accountData) {
-		String[] trans = new String[5];
-		double[] values = new double[5];
 		
+		
+		CDAccount cd = new CDAccount();
+		String[] trans = accountData.split(",");
 		try {
-			for(int i = 0; i <= 4 ; i++) {
-				trans = accountData.split(",");
-				//System.out.println("trans: # "+ i + "   "+ trans[i] );
-				array[i] = trans[i];
-			}								//		 -->separate strings
-			for (int i = 0; i < 3 ; i ++) {					//<----separate strings
-				values[i] = Double.parseDouble(array[i]);
-			} //---> strings converted to doubles.
-			values[4] = Integer.parseInt(array[4]); //term
+				
+					
+				accountNumber =    Long.parseLong(trans[0]);
+				balance =      Double.parseDouble(trans[1]);
+				interestRate = Double.parseDouble(trans[2]);
+				date =       cd.dateAccountOpened(trans[3]);
+				term =           Integer.parseInt(trans[4]);
+			
 		} catch (NumberFormatException e) {
 			throw e;
 		}
-		CDAccount cd = new CDAccount();
-		date = cd.dateAccountOpened(trans[3]);
-		System.out.println(date);
-		accountNumber = (long) values[0];
-		balance = values[1];
-		interestRate = values[2];
-		term = (int) values[4];
+		
+		//CDOffering offering = new CDOffering();
+		cd = new CDAccount(accountNumber, balance, interestRate, date, term);
 		
 		/*
 		System.out.println("Account: " + accountNumber + "\n" +
@@ -61,11 +62,12 @@ public class CDAccount extends BankAccount {
 				"Date: " + date + "\n" + 
 				"Term: " + term);
 		*/
-		return null;
+		return cd;
 	}
 	
 	public  int getTerm() {
-		return offering.getTerm();
+		return term
+				;
 	}
 	
 	@Override
