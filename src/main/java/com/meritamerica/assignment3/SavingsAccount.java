@@ -29,24 +29,18 @@ public class SavingsAccount extends BankAccount{
 
 		try {
 
-			String[] values = accountData.split(","); //System.out.println("trans: # "+ i + "   "+ trans[i] );
-
-			
+			String[] values = accountData.split(","); 
 
 			accountNumber =    Long.parseLong(values[0]);
 			balance =      Double.parseDouble(values[1]);
 			interestRate = Double.parseDouble(values[2]);
 			date =  savings.dateAccountOpened(values[3]);
-		} catch(NumberFormatException e){ // catch exception
-			throw e;					  //throw exception
+		} catch(NumberFormatException e){ 
+			throw e;					  
 		}
+	
 		savings = new SavingsAccount(accountNumber, balance, interestRate, date);
-		/*
-		System.out.println("Account: " + accountNumber + "\n" +
-				"Balance: " + balance + "\n" + 
-				"Interest Rate: " + interestRate + "\n" + 
-				"Date: " + date);
-		 */
+		
 		return savings;
 
 	}

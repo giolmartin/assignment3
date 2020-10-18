@@ -41,17 +41,9 @@ public class CDOffering {
 		
 		offering = new CDOffering(term, interestRate);
 		
-		//term = t;
-		//interestRate = iR;
-		//CDOffering offering = new CDOffering(t,iR);
-		//MeritBank.setCDOfferings(offering);
-		//System.out.println("Inside readFromString");
-		
 		return offering;
 	}
 	
-	
-
 	public String writeToString() {
 		String offering = getTerm() + "," + getInterestRate()+"\n";
 		return offering;
